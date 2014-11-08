@@ -15,7 +15,8 @@ public class AllSubset{
 	{
 		List<Integer> list =new ArrayList<>();
 		createSet(list);
-		List<List<Integer>> allSetList=calculateAllSubset(list);
+		//List<List<Integer>> allSetList=calculateAllSubset(list);
+		List<List<Integer>> allSetList=calculateAllSubsetRec(list);
 		System.out.println("size ="+ allSetList.size());
 		displayList(allSetList);
 	}
@@ -50,9 +51,9 @@ public class AllSubset{
 	private static void createSet(List<Integer> list)
 	{
 		list.add(2);
-		list.add(4);
-		list.add(6);
-		list.add(5);
+		//list.add(4);
+		//list.add(6);
+		//list.add(5);
 	}
 
 	private static void displayList(List<List<Integer>> list)
@@ -68,4 +69,36 @@ public class AllSubset{
 			System.out.println("");
 		}
 	}
+
+	//recursive approach
+	private static List<List<Integer>> calculateAllSubsetRec(List<Integer> list)
+	{
+		List<List<Integer>> totalSetList= new ArrayList<>();
+		return calculateAllSubsetRec(totalSetList, list, 0);
+	}
+
+	 private static List<List<Integer>> calculateAllSubsetRec(List<List<Integer>> totalSetList, List<Integer> list, int index)
+        {
+                //base case
+		if(list.size()==index)
+		{
+			totalSetList.add(new ArrayList<Integer>());
+		}
+		else
+		{
+			totalSetList= calculateAllSubsetRec(totalSetList, list, index+1);
+			int item= list.get(index);
+			List<List<Integer>> otherSubset= new ArrayList<>();
+			
+			for(List<Integer> intList: totalSetList)
+			{ 
+				List<Integer> tempList= new ArrayList<>();
+				tempList.addAll(intList);  	// add existing set val
+				tempList.add(item);		//add ith item
+				otherSubset.add(tempList);		//add both in other subset list
+			}
+			totalSetList.addAll(otherSubset);		//add to main list
+		}
+		return totalSetList;
+        }
 }
