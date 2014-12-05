@@ -7,7 +7,7 @@ public class Link {
 	public Link(){}
 	public Link(int val)
 	{
-		setNum(val);
+		num=val;
 	}
 	public int getNum() {
 		return num;
