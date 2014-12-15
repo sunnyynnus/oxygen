@@ -1,5 +1,7 @@
 package helloWorld;
-
+/**
+ old eclipse work updated
+**/
 public class Tree {
 
 	public Node root;
@@ -11,19 +13,20 @@ public class Tree {
 	
 	public boolean isEmpty()
 	{
-	return root==null;	
+		return root==null;	
 	}
 	
 	public void addNode(int data)
 	{
-	Node newNode=new Node(data);
-	System.out.println("data= "+data);
-	if(isEmpty())
-		root=newNode;
-	else
-	{
-		Node current=root;
-		Node previous=null;
+		Node newNode=new Node(data);
+		if(isEmpty())
+		{
+			root=newNode;
+		}
+		else
+		{
+			Node current=root;
+			Node previous=null;
 		while(current!=null)
 		{
 			previous=current;
@@ -46,7 +49,7 @@ public class Tree {
 }//addnode
 	
 public  void insertNodes()
-	{
+{
 		addNode(50);
 		addNode(40);
 		addNode(60);
@@ -56,7 +59,7 @@ public  void insertNodes()
 		addNode(20);
 		addNode(35);
 		
-	}
+}
 
 public void inOrderTraversal()
 {
