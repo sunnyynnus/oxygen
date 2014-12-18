@@ -82,9 +82,9 @@ public class BFSApp
 	
 	}
 
-	public void printDFSList(List<List<Integer>> vertexLevelList)
+	public void printBFSList(List<List<Integer>> vertexLevelList)
 	{
-		System.out.println("*** DFS *****");
+		System.out.println("*** BFS *****");
 		for(List<Integer> list:vertexLevelList)
                 {
                         for(Integer i: list)
@@ -103,7 +103,7 @@ public class BFSApp
 		
 		bfs.addTestEdges(G);
 		int startingVertex=0; 
-		bfs.printDFSList(bfs.addLevelToVertices(startingVertex, G));
+		bfs.printBFSList(bfs.addLevelToVertices(startingVertex, G));
 		
 	}
 
