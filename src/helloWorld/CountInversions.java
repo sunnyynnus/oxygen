@@ -7,7 +7,8 @@ public class CountInversions
 	public static void main(String[] args)
 	{
 		System.out.println("Inverted Pairs \n");
-		System.out.println("Total count= "+countInversionsRec(arr, 0,arr.length-1));
+		int scratch[]=new int[arr.length];
+		System.out.println("Total count= "+countInversionsRec(arr, scratch, 0,arr.length-1));
 		System.out.println("**sorted list as by product**");
 		for(int i :arr)
 		{
@@ -15,7 +16,7 @@ public class CountInversions
 		}
 	}
 
-	private static int countInversionsRec(int[] arr, int start, int end)
+	private static int countInversionsRec(int[] arr, int scratch[], int start, int end)
 	{
 		int count=0;
 		if(start>=end)
@@ -23,16 +24,16 @@ public class CountInversions
 			return 0;
 		}
 		int mid= start+(end-start)/2;
-		count+=countInversionsRec(arr, start, mid);
-		count+=countInversionsRec(arr, mid+1, end);
-		count+=mergeAndCount(arr, start, mid, end);
+		count+=countInversionsRec(arr, scratch, start, mid);
+		count+=countInversionsRec(arr, scratch,  mid+1, end);
+		count+=mergeAndCount(arr, scratch, start, mid, end);
 		return count;
 	}
 
-	private static int mergeAndCount(int[] arr, int start1, int mid, int end)
+	private static int mergeAndCount(int[] arr, int scratch[], int start1, int mid, int end)
 	{
 		int start2=mid+1, start=start1;
-		int scratch[]=new int[end+1];
+		//int scratch[]=new int[end+1]; less efficient
 		int count=0, ptr=0;
 		while(start1<=mid && start2<=end)
 		{

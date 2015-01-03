@@ -1,4 +1,8 @@
 package helloWorld;
+
+import java.util.Deque;
+import java.util.ArrayDeque;
+import helloWorld.Node;
 /**
  old eclipse work updated
 **/
@@ -27,29 +31,29 @@ public class Tree {
 		{
 			Node current=root;
 			Node previous=null;
-		while(current!=null)
-		{
-			previous=current;
-			if(data<current.data)
-				current=current.leftChild;
+			while(current!=null)
+			{
+				previous=current;
+				if(data<current.data)
+					current=current.leftChild;
+				else
+					current=current.rightChild;
+			}//while
+			if(data<previous.data)
+			{
+				previous.leftChild=newNode;
+			}
 			else
-				current=current.rightChild;
-		}//while
-		if(data<previous.data)
-		{
-			previous.leftChild=newNode;
-		}
-		else
-		{
-			previous.rightChild=newNode;
-		}
-			newNode.parent=previous;
+			{
+				previous.rightChild=newNode;
+			}
+				newNode.parent=previous;
 		
-	}//else
-}//addnode
+		}//else
+	}//addnode
 	
-public  void insertNodes()
-{
+	public  void insertNodes()
+	{
 		addNode(50);
 		addNode(40);
 		addNode(60);
@@ -59,28 +63,56 @@ public  void insertNodes()
 		addNode(20);
 		addNode(35);
 		
-}
+	}
 
-public void inOrderTraversal()
-{
-	System.out.println("*******inorder*******");
-	inOrderTraversal(root);
-	System.out.println("count= "+count);
-}
+	public void inOrderTraversal()
+	{
+		System.out.println("*******inorder*******");
+		inOrderTraversal(root);
+		System.out.println("count= "+count);
+	}
 
-private void inOrderTraversal(Node node)
-{
-	if(node==null) return;
-	count++;
-	inOrderTraversal(node.leftChild);
-	System.out.println(node.data);
-	inOrderTraversal(node.rightChild);
+	private void inOrderTraversal(Node node)
+	{
+		if(node==null) return;
+		count++;
+		inOrderTraversal(node.leftChild);
+		System.out.println(node.data);
+		inOrderTraversal(node.rightChild);
 		
-}
+	}
+	
+	public void inOrderTraversalNRec()
+	{
+   		System.out.println("*******inorder Non rec*******"); 
+   		int count=0;
+   		Node current=root;
+   		Deque<Node> stack = new ArrayDeque<>();
+   		while(true)
+   		{
+   	    		while(current !=null)
+   	    		{
+   	        		stack.push(current);
+	   	        	count++;
+   			        current=current.leftChild;
+   	    		}
+	        	current=stack.pop();
+   	    
+	   	    	System.out.println(current.data);
+   	    
+   	    		current=current.rightChild;
+   	    
+   	    		if(current==null && stack.isEmpty())
+   	    		{
+   	        		break;
+   	    		}
+   		}
+   		System.out.println("count= "+count);
+	}
 
-public Node searchNode(int key)
-{
-	Node current=root;
+	public Node searchNode(int key)
+	{
+		Node current=root;
 			while(true)
 			{
 				if(current!=null)
