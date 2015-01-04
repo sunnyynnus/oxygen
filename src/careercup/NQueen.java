@@ -34,8 +34,10 @@ public class NQueen{
      {
         if(level==n)
         {
- 		list.add(deepClone(map));
-        	return;
+		Map<Integer, Integer> temp=new HashMap<>();
+		temp.putAll(map);
+ 		list.add(temp);
+		return;
         }
         
         for(int i=0;i<n;i++)
@@ -68,7 +70,7 @@ public class NQueen{
          return true;
      }
 
-     private static Map<Integer,Integer> deepClone(Map<Integer,Integer> map)
+    /* private static Map<Integer,Integer> deepClone(Map<Integer,Integer> map)
      {
          Map<Integer,Integer> temp= new HashMap<Integer, Integer>();
          Set<Map.Entry<Integer,Integer>> set=map.entrySet();
@@ -79,5 +81,5 @@ public class NQueen{
             temp.put(m.getKey(),m.getValue());
          }
          return temp;
-     }
+     }*/
 }
