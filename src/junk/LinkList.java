@@ -42,7 +42,7 @@ public class LinkList<T> {
 		if(first!=null)
 		{
 			Link<T> current=first;
-			LinkList tempList=new LinkList();
+			LinkList<T> tempList=new LinkList<>();
 			while(current.next!=null)
 			{
 				
@@ -103,10 +103,10 @@ public class LinkList<T> {
 		
 		if(first!=null && first.next !=null )
 		{
-			Link oCurrent=first;
-			Link eCurrent=first.next;
+			Link<T> oCurrent=first;
+			Link<T> eCurrent=first.next;
 			first=eCurrent;
-			Link temp=null;
+			Link<T> temp=null;
 			while(true)
 			{
 				
@@ -163,7 +163,7 @@ public class LinkList<T> {
 		}
 	}//removeDup
 	
-	public Link<T> findNthToLast(int n)
+	public T findNthToLast(int n)
 	{
 		Link<T> temp=null;
 		Link<T> current=first;
@@ -181,7 +181,7 @@ public class LinkList<T> {
 			temp=temp.next;
 		}
 		
-		return temp;
+		return temp.getNum();
 	}
 	
 	/**
