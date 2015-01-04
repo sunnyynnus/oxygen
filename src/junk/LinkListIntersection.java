@@ -1,16 +1,17 @@
-package linkListEx;
+package junk;
+import junk.LinkList;
 
 public class LinkListIntersection {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		LinkList firstLL=new LinkList();
+		LinkList<Integer> firstLL=new LinkList<>();
 		createList1(firstLL);
-		LinkList secondLL=new LinkList();
+		LinkList<Integer> secondLL=new LinkList<>();
 		createList2(secondLL);
 		firstLL.displayLinkList();
 		secondLL.displayLinkList();
-		LinkList newLL=new LinkList();
+		LinkList<Integer> newLL=new LinkList<Integer>();
 	
 		RecLinkedListIntersection(newLL,firstLL.first, secondLL.first);
 		newLL.displayLinkList();
@@ -21,10 +22,10 @@ public class LinkListIntersection {
 	 * @param secondPtr
 	 * @return
 	 */
-	public static LinkList LinkedListIntersection(Link firstPtr, Link secondPtr)
+	public static LinkList<Integer> LinkedListIntersection(Link<Integer> firstPtr, Link<Integer> secondPtr)
 	{
 	  //  Link temp=null;
-	   	 LinkList newLL= new LinkList();
+	   	 LinkList<Integer> newLL= new LinkList<>();
 	    	while(firstPtr !=null && secondPtr !=null)
 	    	{
 	        	if(firstPtr.getNum()==secondPtr.getNum())
@@ -44,7 +45,7 @@ public class LinkListIntersection {
 	    	return newLL;
 	}
 	
-	public static LinkList RecLinkedListIntersection(LinkList newLL, Link firstPtr, Link secondPtr)
+	public static LinkList<Integer> RecLinkedListIntersection(LinkList<Integer> newLL, Link<Integer> firstPtr, Link<Integer> secondPtr)
 	{
 		if(firstPtr==null || secondPtr==null)
 			return null;
@@ -62,7 +63,7 @@ public class LinkListIntersection {
 		return newLL;
 	}
 	
-	private static void createList1(LinkList lList)
+	private static void createList1(LinkList<Integer> lList)
 	{
 
 		lList.insertFirst(9);
@@ -75,7 +76,7 @@ public class LinkListIntersection {
 		lList.insertFirst(1);		
 		
 	}
-	private static void createList2(LinkList lList)
+	private static void createList2(LinkList<Integer> lList)
 	{
 
 	

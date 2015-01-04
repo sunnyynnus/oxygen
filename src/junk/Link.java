@@ -1,18 +1,18 @@
-package linkListEx;
+package junk;
 
-public class Link {
+public class Link<T> {
 
-	private int num;
-	public Link next;
+	private T num;
+	public Link<T> next;
 	public Link(){}
-	public Link(int val)
+	public Link(T val)
 	{
 		num=val;
 	}
-	public int getNum() {
+	public T getNum() {
 		return num;
 	}
-	public void setNum(int num) {
+	public void setNum(T num) {
 		this.num = num;
 	}
 	

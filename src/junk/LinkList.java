@@ -1,9 +1,10 @@
-package linkListEx;
+package junk;
+import junk.Link;
 
-public class LinkList {
+public class LinkList<T> {
 
-	public Link first;
-	public Link last;
+	public Link<T> first;
+	public Link<T> last;
 	public LinkList()
 {
 		first=null;
@@ -16,9 +17,9 @@ public class LinkList {
 		return (first==null);
 	}
 	
-	public void insertFirst(int num)
+	public void insertFirst(T num)
 	{
-		Link newLink =new Link(num);
+		Link<T> newLink =new Link<>(num);
 		newLink.next=first;
 		first=newLink;
 	}//insertFirst
@@ -26,7 +27,7 @@ public class LinkList {
 	public void displayLinkList()
 	{
 		System.out.println("***********LinkList start *******");
-		Link current=first;
+		Link<T> current=first;
 		while(current !=null)
 		{
 		
@@ -40,7 +41,7 @@ public class LinkList {
 	{
 		if(first!=null)
 		{
-			Link current=first;
+			Link<T> current=first;
 			LinkList tempList=new LinkList();
 			while(current.next!=null)
 			{
@@ -70,8 +71,8 @@ public class LinkList {
 	{
 		if(first!=null && first.next !=null && first.next.next !=null )
 		{
-			Link oCurrent=first;
-			Link eCurrent=first.next;
+			Link<T> oCurrent=first;
+			Link<T> eCurrent=first.next;
 			
 			oCurrent.next=oCurrent.next.next;
 			oCurrent=oCurrent.next;
@@ -79,7 +80,7 @@ public class LinkList {
 			
 			while(oCurrent!=null && oCurrent.next !=null)
 			{
-				Link tempOLink=oCurrent.next.next;
+				Link<T> tempOLink=oCurrent.next.next;
 				oCurrent.next.next=eCurrent;
 				eCurrent=oCurrent.next;
 				oCurrent.next=tempOLink;
@@ -134,15 +135,15 @@ public class LinkList {
 	
 	public void removeDuplicates()
 	{
-		Link outerCurrent=first;
+		Link<T> outerCurrent=first;
 		
 		if(outerCurrent ==null || outerCurrent.next ==null)
 			System.out.println("no dup");
 		else
 		{
-			Link current=null;
+			Link<T> current=null;
 			//Link temp=null;
-			Link previous=null;
+			Link<T> previous=null;
 			while(outerCurrent !=null)
 			{
 				current=outerCurrent;
@@ -162,10 +163,10 @@ public class LinkList {
 		}
 	}//removeDup
 	
-	public Link findNthToLast(int n)
+	public Link<T> findNthToLast(int n)
 	{
-		Link temp=null;
-		Link current=first;
+		Link<T> temp=null;
+		Link<T> current=first;
 		for(int i=1;i<n;i++)
 		{
 			if(current!=null)
@@ -195,12 +196,12 @@ public class LinkList {
 	 * ___  ___  ___
 	 * P    C    Temp
 	 */
-	private void reverseNodeRec(Link previous, Link current)
+	private void reverseNodeRec(Link<T> previous, Link<T> current)
 	{
 		if(current==null)
 			return;
 				
-		Link temp=current.next;
+		Link<T> temp=current.next;
 		current.next=previous;
 		
 		first=current;
@@ -224,10 +225,11 @@ public class LinkList {
 	 * @param current
 	 * @param k
 	 */
-	private void recursiveReverseAtKIntervals(Link previous,Link current, int k)
+	private void recursiveReverseAtKIntervals(Link<T> previous,Link<T> current, int k)
 	{
 		int count=0;
-		Link temp=null,Next=null;
+		Link<T> temp=null;
+		Link<T> Next=null;
 		while(count<k && current !=null)
 		{
 			Next=current.next;
@@ -243,10 +245,10 @@ public class LinkList {
 	{
 		if(first !=null && first.next!=null) // nothing to do if size<2
 	    	{
-	        	Link current=first;
-	        	Link previous=current;
+	        	Link<T> current=first;
+	        	Link<T> previous=current;
 	        	current=current.next;
-	        	Link temp=current.next;
+	        	Link<T> temp=current.next;
 	        	current.next=previous;
 	        	previous.next=null;
 	        
@@ -271,13 +273,13 @@ public class LinkList {
 		reverseLinkedListRec(null, first);
 	}
 
-	private void reverseLinkedListRec(Link previous, Link current)
+	private void reverseLinkedListRec(Link<T> previous, Link<T> current)
 	{
 	    
 	    	if(current==null)
 	    		return;
 	   
-	        Link  temp=current.next;
+	        Link<T> temp=current.next;
 	        current.next=previous;
 	        first=current;
 	        reverseLinkedListRec(current, temp);
@@ -286,9 +288,9 @@ public class LinkList {
 	   
 	}
 	
-	public void insertLast(int num)
+	public void insertLast(T num)
 	{
-		Link temp= new Link(num);
+		Link<T> temp= new Link<T>(num);
 		temp.next=null;
 		if(isEmpty())
 		{
