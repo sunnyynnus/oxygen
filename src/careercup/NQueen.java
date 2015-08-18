@@ -24,20 +24,20 @@ public class NQueen{
      
      public static List<Map<Integer, Integer>> getNQueenPossiblePos(int numQueen)
      {
-	Map<Integer, Integer> map=new HashMap<>();
+	      Map<Integer, Integer> map=new HashMap<>();
         List<Map<Integer, Integer>> list=new ArrayList<>();
-     	getNQueenPossiblePos(numQueen, 0,map, list);
-	return list;
+     	  getNQueenPossiblePos(numQueen, 0,map, list);
+	      return list;
      }
 	 
      private static void getNQueenPossiblePos(int n, int level, Map<Integer, Integer> map, List<Map<Integer, Integer>> list)
      {
         if(level==n)
         {
-		Map<Integer, Integer> temp=new HashMap<>();
-		temp.putAll(map);
- 		list.add(temp);
-		return;
+		      Map<Integer, Integer> temp=new HashMap<>();
+		      temp.putAll(map);
+ 		      list.add(temp);
+		      return;
         }
         
         for(int i=0;i<n;i++)
@@ -61,7 +61,7 @@ public class NQueen{
             Map.Entry<Integer,Integer> m= itr.next();
             int k=m.getKey();
             int v=m.getValue();
-            if(v==col || (row-k)==(col-v) || (row-k)==-(col-v))
+            if(v==col || Math.abs(row-k)==Math.abs(col-v))
             {
                 return false;
             }
