@@ -3,18 +3,22 @@ package helloWorld;
 public class CountInversions
 {
 
-	static int arr[]={8, 1, 5, 3, 2, 7, 4};
 	public static void main(String[] args)
 	{
 		System.out.println("Inverted Pairs \n");
-		int scratch[]=new int[arr.length];
-		System.out.println("Total count= "+countInversionsRec(arr, scratch, 0,arr.length-1));
-		System.out.println("**sorted list as by product**");
+		int arr[]={8, 1, 5, 3, 2, 7, 4};
+		System.out.println("Total count= "+countInversions(arr));
+		System.out.println("**sorted list as by-product**");
 		for(int i :arr)
 		{
 			System.out.println(i);
 		}
 	}
+
+  public static int countInversions(int[] arr){
+    int scratch[]=new int[arr.length];
+    return countInversionsRec(arr, scratch, 0,arr.length-1);
+  }
 
 	private static int countInversionsRec(int[] arr, int scratch[], int start, int end)
 	{
@@ -46,7 +50,7 @@ public class CountInversions
 			{
 				count+=mid-start1+1;
 				scratch[ptr++]=arr[start2++];
-                       	        for(int i=start1; i<=mid;i++)
+        for(int i=start1; i<=mid;i++)
 				{
 					System.out.println("("+arr[i]+","+arr[start2-1]+")");	
 				}
@@ -61,8 +65,7 @@ public class CountInversions
 		
 		while(start2<=end)
 		{
-			count+=mid-start1+1;
-                        scratch[ptr++]=arr[start2++];
+			scratch[ptr++]=arr[start2++];
 		}
 		
 		for(int i=0;i<ptr;i++)
