@@ -1,5 +1,9 @@
 package helloWorld;
 
+/**
+ *Max heap
+ * 
+ * **/
 public class Heap{
 
   public static void main(String []args){
@@ -18,7 +22,7 @@ public class Heap{
   private static int[] generateRandomData(){
                        
     Double mul=new Double(10000000);
-    int size=5000000;
+    int size=10000000;
     int[] arr=new int[size];
     for(int i=1 ; i<size; i++){
       arr[i]= (int)(Math.random()*mul);
@@ -33,34 +37,32 @@ public class Heap{
     for(int i=size/2; i>0; i--){
       heapify(H, i);
     }
-                                          }
-  private static void heapify(int[] H, int i){
-    heapify(H, i, 0);
   }
   
-  private static void heapify(int[] H, int i, int size){
+  private static void heapify(int[] H, int i){
     if(i>0){
-      size=(size==0) ? H.length-1 : size;
-      int lchild=2*i;
+      int largest=i;
+      int lChild=2*i;
+      int size = H.length-1;
       //if rchild exists
-      if(lchild+1<=size){
-        if(H[lchild]<H[lchild+1]){
-          if(H[lchild]<H[i]){
-            swap(H, lchild, i);
+      if(lChild+1<=size){
+        if(H[lChild]<H[lChild+1]){
+          if(H[lChild]<H[i]){
+            largest = lChild+1;
           }
         } else {
-          if(H[lchild+1]<H[i]){
-            swap(H, lchild+1, i);
+          if(H[lChild+1]<H[i]){
+            largest = lChild;
            }
         }
       }
       //if lchild exists
-      if(lchild<=size && H[lchild]<H[i]){
-        swap(H, lchild, i);
+      if(lChild<=size && H[lChild]<H[i]){
+        largest= lChild;
       }
-                                                                                                      
-      if(i>1){
-        heapify(H, i/2, size);
+      if(i!=largest){
+        swap(H, largest, i);
+        heapify(H, largest);
       }
     }
                                                
@@ -74,11 +76,11 @@ public class Heap{
                                      
   private static int[] createHeapTopDown(){
     Double mul=new Double(10000000);
-    int size= 5000000;
+    int size= 10000000;
     int[] arr=new int[size];
     for(int i=1 ; i<size; i++) {
       arr[i]= (int)(Math.random()*mul);
-      heapify(arr, i, i);
+      heapify(arr, i);
     }
     return arr;
                                                                       
