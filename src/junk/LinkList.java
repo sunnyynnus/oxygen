@@ -210,36 +210,37 @@ public class LinkList<T> {
 	}//reverse
 	
 	/**
-	 * not working properly
+	 * not working properly - fixed
 	 * @param k
 	 */
 	public void reverseNodeAtKIntervals(int k)
 	{
-		
-		recursiveReverseAtKIntervals(null,first,k);
+		recursiveReverseAtKIntervals(first,k);
 	}
 	
-	/**
-	 *  not working
-	 * @param previous
-	 * @param current
-	 * @param k
-	 */
-	private void recursiveReverseAtKIntervals(Link<T> previous,Link<T> current, int k)
-	{
-		int count=0;
-		Link<T> temp=null;
-		Link<T> Next=null;
-		while(count<k && current !=null)
-		{
-			Next=current.next;
-			//reverse iteratively
-			count++;
-			
-		}//while
-		//recursiveReverseAtKIntervals(temp,Next,k);
-		
-	}
+	public Link<T> recursiveReverseAtKIntervals(Link<T> first, int k){
+
+         if(first==null || first.next==null){
+             return first;
+         }
+         int count=0;
+         Link<T> temp = first;
+         while(count++<k && temp!=null){
+             temp=temp.next;
+         }
+         Link<T> link = recursiveReverseAtKIntervals(temp, k);
+         count=0;
+         Link<T> previous= first;
+         Link<T> current = previous.next;
+         while(++count<k && current !=null){
+             Link<T> next= current.next;
+             current.next = previous;
+             previous= current;
+             current=next;
+         }
+         first.next= link;
+         return previous;
+   }
 	
 	public void reverseLinkedListIter()
 	{
