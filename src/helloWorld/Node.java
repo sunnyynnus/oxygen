@@ -20,4 +20,8 @@ public class Node {
 	{
 		System.out.println("data of Node= "+n.data);
 	}
+
+  public String toString(){
+    return String.valueOf(data);
+  }
 }
