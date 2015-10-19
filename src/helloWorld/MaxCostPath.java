@@ -29,9 +29,7 @@ public class MaxCostPath{
         List<Node> tempList= new ArrayList<>();
         tempList.addAll(list);
         megaList.add(tempList);
-        list.remove(list.size()-1);
-        return;
-      } else{
+        } else{
         int tempSum= countSum(megaList.get(0));
         if(tempSum<maxSum){
           megaList.clear();
@@ -44,15 +42,14 @@ public class MaxCostPath{
           tempList.addAll(list);
           megaList.add(tempList);
         }
-          list.remove(list.size()-1);
-          return;
-        }
-             
+      }
+        list.remove(list.size()-1);
+        return;
      }
      getMaxCostPath(node.leftChild, megaList, list, maxSum);
      getMaxCostPath(node.rightChild, megaList, list, maxSum);
      list.remove(node); 
-		 maxSum-=node.data;                                                                                                                                                                                                                                 
+     maxSum-= node.data;                                                                                                                                                                                                                                 
   }
 
   private static int countSum(List<Node> temp){
