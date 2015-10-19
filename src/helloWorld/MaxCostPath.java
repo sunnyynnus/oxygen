@@ -14,11 +14,11 @@ public class MaxCostPath{
   public static List<List<Node>> getMaxCostPath(Node root){
     List<List<Node>> megaList = new ArrayList<>();
     List<Node> list= new ArrayList<>();
-    getMaxCostPath(root, megaList, list, 0);
+    getMaxCostPath(root, megaList, list, 0, new Int());
     return megaList;
   }
 
-  private static void getMaxCostPath(Node node, List<List<Node>> megaList, List<Node> list, int maxSum){
+  private static void getMaxCostPath(Node node, List<List<Node>> megaList, List<Node> list, int maxSum, Int listSum){
     if(node==null){
       return;
     }
@@ -29,15 +29,15 @@ public class MaxCostPath{
         List<Node> tempList= new ArrayList<>();
         tempList.addAll(list);
         megaList.add(tempList);
+        listSum.sum= maxSum;
         } else{
-        int tempSum= countSum(megaList.get(0));
-        if(tempSum<maxSum){
+        if(listSum.sum<maxSum){
           megaList.clear();
           List<Node> tempList= new ArrayList<>();
           tempList.addAll(list);
           megaList.add(tempList);
-                                 
-        } else if(tempSum==maxSum){
+          listSum.sum= maxSum;                       
+        } else if(listSum.sum==maxSum){
           List<Node> tempList= new ArrayList<>();
           tempList.addAll(list);
           megaList.add(tempList);
@@ -46,16 +46,13 @@ public class MaxCostPath{
         list.remove(list.size()-1);
         return;
      }
-     getMaxCostPath(node.leftChild, megaList, list, maxSum);
-     getMaxCostPath(node.rightChild, megaList, list, maxSum);
+     getMaxCostPath(node.leftChild, megaList, list, maxSum, listSum);
+     getMaxCostPath(node.rightChild, megaList, list, maxSum, listSum);
      list.remove(node); 
      maxSum-= node.data;                                                                                                                                                                                                                                 
   }
 
-  private static int countSum(List<Node> temp){
-    int count=0;
-    for(Node node : temp)
-      count+= node.data;
-    return count;
+  static class Int{
+      int sum;
   }
 }
