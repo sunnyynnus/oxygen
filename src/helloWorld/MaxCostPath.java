@@ -49,7 +49,7 @@ public class MaxCostPath{
      getMaxCostPath(node.leftChild, megaList, list, maxSum, listSum);
      getMaxCostPath(node.rightChild, megaList, list, maxSum, listSum);
      list.remove(node); 
-     maxSum-= node.data;                                                                                                                                                                                                                                 
+     //maxSum-= node.data;                                                                                                                                                                                                                                 
   }
 
   static class Int{
