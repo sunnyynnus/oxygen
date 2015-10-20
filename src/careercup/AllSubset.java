@@ -1,8 +1,6 @@
 package careercup;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
+import java.util.*;
 
 /**
 	 11/7/14 
@@ -13,19 +11,16 @@ public class AllSubset{
 
 	public static void main(String[] args)
 	{
-		List<Integer> list =new ArrayList<>();
-		createSet(list);
-		//List<List<Integer>> allSetList=calculateAllSubset(list);
-		List<List<Integer>> allSetList=calculateAllSubsetRec(list);
-		System.out.println("size ="+ allSetList.size());
-		displayList(allSetList);
+		List<Integer> list = Arrays.asList(2, 3, 5);
+		List<List<Integer>> allSetList=calculateAllSubset(list);
+		List<List<Integer>> allSetListRec=calculateAllSubsetRec(list);
+		System.out.println("List is: "+ allSetList+"\n*** with Recursive approach **\n"+  allSetListRec);
 	}
 
 	private static List<List<Integer>> calculateAllSubset(List<Integer> list)
 	{
 		List<List<Integer>> totalSetList=new ArrayList<>();
-		//List<Integer> tempList=new ArrayList<>();
-   		int max=1<<list.size();
+		int max=1<<list.size();
 		
 		for(int i=0;i<max;i++)
 		{
@@ -47,58 +42,28 @@ public class AllSubset{
 		return totalSetList;
 	}
 
-	
-	private static void createSet(List<Integer> list)
-	{
-		list.add(2);
-		//list.add(4);
-		//list.add(6);
-		//list.add(5);
-	}
-
-	private static void displayList(List<List<Integer>> list)
-	{
-		Iterator<List<Integer>> listIter = list.iterator();
-		while(listIter.hasNext())
-		{
-		    List<Integer> intList= listIter.next();
-			for(Integer i : intList)
-			{
-				System.out.print(i);
-			}
-			System.out.println("");
-		}
-	}
-
 	//recursive approach
-	private static List<List<Integer>> calculateAllSubsetRec(List<Integer> list)
+	public static List<List<Integer>> calculateAllSubsetRec(List<Integer> list)
 	{
 		List<List<Integer>> totalSetList= new ArrayList<>();
-		return calculateAllSubsetRec(totalSetList, list, 0);
+	  calculateAllSubsetRec(totalSetList, list, new ArrayList<>(), 0);
+    return totalSetList;
 	}
 
-	 private static List<List<Integer>> calculateAllSubsetRec(List<List<Integer>> totalSetList, List<Integer> list, int index)
-        {
-                //base case
-		if(list.size()==index)
-		{
-			totalSetList.add(new ArrayList<Integer>());
-		}
-		else
-		{
-			totalSetList= calculateAllSubsetRec(totalSetList, list, index+1);
-			int item= list.get(index);
-			List<List<Integer>> otherSubset= new ArrayList<>();
-			
-			for(List<Integer> intList: totalSetList)
-			{ 
-				List<Integer> tempList= new ArrayList<>();
-				tempList.addAll(intList);  	// add existing set val
-				tempList.add(item);		//add ith item
-				otherSubset.add(tempList);		//add both in other subset list
-			}
-			totalSetList.addAll(otherSubset);		//add to main list
-		}
-		return totalSetList;
-        }
+  private static void calculateAllSubsetRec(List<List<Integer>> totalSetList, List<Integer> list, List<Integer> temp, int index){
+     
+    if(index== list.size()){
+      if(!temp.isEmpty()){
+        List<Integer> set= new ArrayList<>(temp);
+        totalSetList.add(set);
+      }
+      return;
+    }
+
+    temp.add(list.get(index));
+    calculateAllSubsetRec(totalSetList, list, temp, index+1); 
+    temp.remove(list.get(index));
+    calculateAllSubsetRec(totalSetList, list, temp, index+1);
+
+   }
 }
