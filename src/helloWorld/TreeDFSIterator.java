@@ -3,13 +3,20 @@ import java.util.*;
 
 public class TreeDFSIterator{
 
-     public static void main(String []args){
+   public static void main(String []args){
         Tree<Integer> tree= new Tree<>();
         insertNodes(tree);
 
+        System.out.println("***Post order**");
         for(Integer node:tree)
              System.out.println(node);
-     }
+
+        Iterator<Integer> iter= tree.getInOrderIterator();
+        System.out.println("***In order**");
+        while(iter.hasNext()){
+          System.out.println(iter.next());
+        }
+  }
      
   public static void insertNodes(Tree<Integer> tree){
 		tree.addNode(50);
@@ -28,7 +35,7 @@ class PostOrderTreeIterator<T extends Comparable<T>> implements Iterator<T>{
     Deque<Node<T>> stack = new ArrayDeque<>();
     Set<Node<T>> visitedSet= new HashSet<>();
     
-    public  PostOrderTreeIterator(Node<T> node){
+    protected PostOrderTreeIterator(Node<T> node){
         while(node!=null){
             stack.push(node);
             node= node.leftChild;
@@ -36,15 +43,15 @@ class PostOrderTreeIterator<T extends Comparable<T>> implements Iterator<T>{
     }
     
     public T next(){
-        Node<T> node= stack.peek();
-        if(node==null){
+        if(stack.isEmpty()){
             throw new NoSuchElementException();
         }
+        Node<T> node= stack.peek();
         while(node.rightChild!=null){
             Node<T> parentNode= null;
             node=node.rightChild;
             if(visitedSet.contains(node)){
-                    break;
+              break;
             }
             while(node!=null){
                 stack.push(node);
@@ -60,6 +67,46 @@ class PostOrderTreeIterator<T extends Comparable<T>> implements Iterator<T>{
     
     public boolean hasNext(){
         return stack.size()>0;
+    }
+}
+
+/**
+ * Iterator which iterate in In order- sorted val
+ */
+class InOrderTreeIterator<T extends Comparable<T>> implements Iterator<T>{
+    
+    Deque<Node<T>> stack = new ArrayDeque<>();
+    Set<Node<T>> visitedSet = new HashSet<>();
+
+    protected InOrderTreeIterator(Node<T> root){
+      stack.push(root);
+    }
+
+    public T next(){
+      if(stack.isEmpty()){
+        throw new NoSuchElementException();
+      }
+      Node<T> node= stack.peek();
+      // Left
+      while(node.leftChild!= null){
+        node= node.leftChild;
+        if(visitedSet.contains(node)){
+          break;
+        }
+        stack.push(node);
+      }
+      //Data
+      node= stack.pop();
+      //Right
+      if(node.rightChild!=null){
+        stack.push(node.rightChild);
+      }
+      visitedSet.add(node);
+      return node.data;
+    }
+  
+    public boolean hasNext(){
+      return !stack.isEmpty();
     }
 }
 
@@ -97,9 +144,14 @@ class Tree<T extends Comparable<T>> implements Iterable<T>{
 		}//else
 	}//addnode
 	
+  // default option is Post order iterator
 	public Iterator<T> iterator(){
-	     return new PostOrderTreeIterator<>(root);
+    return new PostOrderTreeIterator<>(root);
 	}
+
+  public Iterator<T> getInOrderIterator(){
+    return new InOrderTreeIterator<>(root);
+  }
 }
 
 class Node<T extends Comparable<T>> {
