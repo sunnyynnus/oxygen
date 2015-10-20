@@ -8,9 +8,7 @@ import java.util.*;
 */
 public class AllSubset{
 
-
-	public static void main(String[] args)
-	{
+	public static void main(String[] args){
 		List<Integer> list = Arrays.asList(2, 3, 5);
 		List<List<Integer>> allSetList=calculateAllSubset(list);
 		List<List<Integer>> allSetListRec=calculateAllSubsetRec(list);
@@ -43,10 +41,9 @@ public class AllSubset{
 	}
 
 	//recursive approach
-	public static List<List<Integer>> calculateAllSubsetRec(List<Integer> list)
-	{
-		List<List<Integer>> totalSetList= new ArrayList<>();
-	  calculateAllSubsetRec(totalSetList, list, new ArrayList<>(), 0);
+	public static List<List<Integer>> calculateAllSubsetRec(List<Integer> list){
+    List<List<Integer>> totalSetList= new ArrayList<>();
+    calculateAllSubsetRec(totalSetList, list, new ArrayList<>(), 0);
     return totalSetList;
 	}
 
