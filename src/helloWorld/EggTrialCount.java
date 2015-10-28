@@ -1,6 +1,6 @@
 package helloWorld;
 /**
- * famous min egg trial count problem
+ * famous  min egg trial count problem
  * 
 **/
 public class EggTrialCount{
