@@ -15,8 +15,9 @@ public class Heap{
     int[] B= createHeapTopDown();
     long t3=System.currentTimeMillis(); 
                                                                  
-    System.out.println(t2-t1);
-    System.out.println(t3-t2);
+    System.out.println("bottom-up time ::" + (t2-t1));
+    System.out.println("top-down time::" + (t3-t2));
+    printHeap(A, 4);
   }
             
   private static int[] generateRandomData(){
@@ -33,7 +34,6 @@ public class Heap{
   private static void createHeapBottomUp(int[] H){
                             
     int size=H.length-1;
-                                     
     for(int i=size/2; i>0; i--){
       heapify(H, i);
     }
@@ -44,21 +44,13 @@ public class Heap{
       int largest=i;
       int lChild=2*i;
       int size = H.length-1;
-      //if rchild exists
-      if(lChild+1<=size){
-        if(H[lChild]<H[lChild+1]){
-          if(H[lChild]<H[i]){
-            largest = lChild+1;
-          }
-        } else {
-          if(H[lChild+1]<H[i]){
-            largest = lChild;
-           }
-        }
-      }
       //if lchild exists
-      if(lChild<=size && H[lChild]<H[i]){
-        largest= lChild;
+      if(lChild<=size && H[largest]<H[lChild]){
+        largest = lChild;
+      }
+      //if rchild exists
+      if(lChild+1<=size && H[largest]<H[lChild+1]){
+        largest= lChild+1;
       }
       if(i!=largest){
         swap(H, largest, i);
@@ -84,6 +76,24 @@ public class Heap{
     }
     return arr;
                                                                       
+  }
+
+  //root at level 1 ; root index is 1
+  //expecting full BT
+  private static void printHeap(int[] arr, int level){
+    if(level<0) {
+      return;
+    }
+    if(Math.pow(2, level+1)> arr.length){
+      level=(int)Math.log(arr.length);
+    }
+    for(int i=0; i<level; i++){
+      int base= (int)Math.pow(2, i);
+      for(int j=base; j<Math.pow(2, i+1); j++){
+        System.out.print(arr[j]+" ");
+      }
+      System.out.println();
+    }
   }
 }
 
