@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.Map.Entry;
 
 public class NQueen{
 
      public static void main(String []args){
         int numQueen=8;
         
-        List<Map<Integer, Integer>> list= getNQueenPossiblePos(numQueen);
+        List<Map<Integer, Integer>> list= (new NQueen()).getNQueenPossiblePos(numQueen);
 
         for(Map<Integer, Integer> m: list)
         {
@@ -22,21 +23,18 @@ public class NQueen{
         System.out.println("Total position soln. = "+list.size());
      }
      
-     public static List<Map<Integer, Integer>> getNQueenPossiblePos(int numQueen)
+     public List<Map<Integer, Integer>> getNQueenPossiblePos(int numQueen)
      {
-	      Map<Integer, Integer> map=new HashMap<>();
         List<Map<Integer, Integer>> list=new ArrayList<>();
-     	  getNQueenPossiblePos(numQueen, 0,map, list);
+     	  getNQueenPossiblePos(numQueen, 0, new HashMap<Integer, Integer>(), list);
 	      return list;
      }
 	 
-     private static void getNQueenPossiblePos(int n, int level, Map<Integer, Integer> map, List<Map<Integer, Integer>> list)
+     private void getNQueenPossiblePos(int n, int level, Map<Integer, Integer> map, List<Map<Integer, Integer>> list)
      {
         if(level==n)
         {
-		      Map<Integer, Integer> temp=new HashMap<>();
-		      temp.putAll(map);
- 		      list.add(temp);
+ 		      list.add(new HashMap<>(map));
 		      return;
         }
         
@@ -52,15 +50,12 @@ public class NQueen{
         }
      }
      
-     private static boolean checkOK(int row, int col, Map<Integer, Integer> map)
+     private boolean checkOK(int row, int col, Map<Integer, Integer> map)
      {
-         Set<Map.Entry<Integer,Integer>> set=map.entrySet();
-         Iterator<Map.Entry<Integer,Integer>> itr =set.iterator();
-         while(itr.hasNext())
+         for(Entry<Integer, Integer> entry: map.entrySet())
          {
-            Map.Entry<Integer,Integer> m= itr.next();
-            int k=m.getKey();
-            int v=m.getValue();
+            int k=entry.getKey();
+            int v=entry.getValue();
             if(v==col || Math.abs(row-k)==Math.abs(col-v))
             {
                 return false;
@@ -70,16 +65,4 @@ public class NQueen{
          return true;
      }
 
-    /* private static Map<Integer,Integer> deepClone(Map<Integer,Integer> map)
-     {
-         Map<Integer,Integer> temp= new HashMap<Integer, Integer>();
-         Set<Map.Entry<Integer,Integer>> set=map.entrySet();
-         Iterator<Map.Entry<Integer,Integer>> itr=set.iterator();
-         while(itr.hasNext())
-         {
-            Map.Entry<Integer,Integer> m= itr.next();
-            temp.put(m.getKey(),m.getValue());
-         }
-         return temp;
-     }*/
 }
