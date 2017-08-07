@@ -48,7 +48,8 @@ public class NearestLeaf{
          	
 		int leftChildVal= closestLeafMappings.getOrDefault(root.leftChild, Integer.MAX_VALUE); 
          	int rightChildVal= closestLeafMappings.getOrDefault(root.rightChild, Integer.MAX_VALUE); 
-         	int distanceFromChild = Math.min(leftChildVal, rightChildVal) == Integer.MAX_VALUE ? -1 : Math.min(leftChildVal, rightChildVal);
+         	// for leaf nodes, it will be -1
+		int distanceFromChild = Math.min(leftChildVal, rightChildVal) == Integer.MAX_VALUE ? -1 : Math.min(leftChildVal, rightChildVal);
          
         	closestLeafMappings.put(root, distanceFromChild+1);
 	}
