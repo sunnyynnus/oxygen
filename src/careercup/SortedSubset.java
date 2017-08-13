@@ -8,8 +8,8 @@ import java.util.*;
 public class SortedSubset{
 
 	public static void main(String[] args){
-		int[] arr = {1, 1, 1, 2, 2, 2, 3, 3, 3, 9, 9, 9, 9, 9};
-		int k = 5;
+		int[] arr = {-1, 1, 2, 3, 4, 9, 19, 29, 39, 49};
+		int k = 35;
 		SortedSubset obj = new SortedSubset();
 		System.out.println("count = "+obj.getAllSubsetsCountBruteForce(arr, k));
 	}
@@ -19,6 +19,14 @@ public class SortedSubset{
 		long count = 0;
 		long maxPossibleCount = (long)Math.pow(2, arr.length) - 1;
 		
+		if(2*arr[arr.length-1] < k){
+			return maxPossibleCount;
+		}
+		
+		if(2*arr[0] > k){
+			return 0;
+		}
+			
 		while(maxPossibleCount > 0){
 			String binaryNum = Long.toBinaryString(maxPossibleCount);
 			// min(A') index
