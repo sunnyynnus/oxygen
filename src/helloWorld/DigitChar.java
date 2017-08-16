@@ -24,14 +24,11 @@ public class DigitChar{
                return countf(str.substring(2));
            } else if(ch<=26){
                return countf(str.substring(1))+countf(str.substring(2));
-           } else{
-               return countf(str.substring(1));
            }
-       } else{
-            return countf(str.substring(1));
-       }
-       
+       } 
+       return countf(str.substring(1));       
    }
+
    public static void convertToChar(String str){
       convertToChar(str, "");
    }
