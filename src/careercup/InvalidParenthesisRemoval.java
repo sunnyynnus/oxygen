@@ -50,16 +50,17 @@ public class InvalidParenthesisRemoval{
 
 	private boolean isValid(String parenthesisString){
 		boolean valid = true;
-		Deque<Character> stack = new ArrayDeque<>();
+		int extraOpeningBracesCount = 0;
 		for(int i =0; i< parenthesisString.length(); i++){
 			char ch = parenthesisString.charAt(i);
 			if(ch=='('){
-				stack.push(ch);
+				extraOpeningBracesCount++;
 			} else if(ch==')'){
-				if(stack.isEmpty() || stack.pop() != '('){
+				extraOpeningBracesCount--;
+			}
+			if(extraOpeningBracesCount < 0){
 					valid = false;
 					break;
-				} 
 			} 
 		}
 		return valid; 
